@@ -1,4 +1,4 @@
-import Vue from "./vue";
+import Vue from "../package/main";
 new Vue({
   el: "#app",
   data: {

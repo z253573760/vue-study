@@ -1,5 +1,5 @@
 import { compier } from "./compier";
-import { node2VNode } from "./vnode";
+import { node2VNode, vNode2Node } from "./vnode";
 export default function Vue(opts) {
   this.$options = opts;
   this.$el = document.querySelector(opts.el);
@@ -14,7 +14,9 @@ export default function Vue(opts) {
 Vue.prototype.compier = function () {
   const cloneNode = this.$el.cloneNode(true); // 先复制一份DOM再说
   compier(cloneNode, this._data); // 编译模板 => 把模板中的插值表达式替换成data中的数据
-  node2VNode(cloneNode);
+  console.log("res", node2VNode(cloneNode));
+  const res = node2VNode(cloneNode);
+  console.log("ddom", vNode2Node(res));
   this.update(cloneNode);
 };
 

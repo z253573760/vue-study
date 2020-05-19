@@ -17,7 +17,7 @@ export function compier(template, data) {
         return createGetValueByPath(key)(data);
       });
     } else if (nodeType === 1) {
-      // ·1 元素节点类型 判断是否包含子元素 循环递归
+      // ·1 元素节点类型 判断是否包含子元素 递归
       compier(item, data);
     }
   }
