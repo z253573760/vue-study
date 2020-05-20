@@ -1,10 +1,14 @@
 import { compier } from "./compier";
 import { node2VNode, vNode2Node } from "./vnode";
+import { observe } from "./observe";
+import { proxy } from "./proxy";
+import $event from "./event";
 export default function Vue(opts) {
   this.$options = opts;
   this.$el = document.querySelector(opts.el);
-  this._parent = this.$el.parentNode;
-  this._data = opts.data;
+  this.$parent = this.$el.parentNode;
+  this._data = opts.data || Object.create({});
+  this.initData(this._data);
   this.render();
 }
 
@@ -13,11 +17,9 @@ export default function Vue(opts) {
  */
 Vue.prototype.compier = function () {
   const cloneNode = this.$el.cloneNode(true); // 先复制一份DOM再说
-  compier(cloneNode, this._data); // 编译模板 => 把模板中的插值表达式替换成data中的数据
-  console.log("res", node2VNode(cloneNode));
-  const res = node2VNode(cloneNode);
-  console.log("ddom", vNode2Node(res));
-  this.update(cloneNode);
+  const vNode = node2VNode(cloneNode);
+  compier(vNode, this._data); // 编译模板 => 把虚拟DOM中的插值表达式替换成data中的数据
+  this.update(vNode);
 };
 
 /**
@@ -28,8 +30,33 @@ Vue.prototype.render = function () {
 };
 
 /**将DOM 元素更新到 DOM 中
- * @param {DomNode} node
+ * @param {vNode} vNode
  */
-Vue.prototype.update = function (node) {
-  this._parent.replaceChild(node, app); // 把app的dom节点替换掉
+Vue.prototype.update = function (vNode) {
+  const realNode = vNode2Node(vNode);
+  this.$parent.replaceChild(realNode, app); // 把app的dom节点替换掉
+};
+
+Vue.prototype.mount = function () {
+  this.render = this.createRenderFn();
+  this.mountedComponent();
+};
+
+Vue.prototype.mountedComponent = function () {
+  const mount = () => {
+    this.update(this.render());
+  };
+  mount();
+};
+
+Vue.prototype.initData = function (data) {
+  proxy(this, "_data");
+  observe(data);
+};
+
+/**
+ * 生成render函数 同时缓存虚拟DOM
+ */
+Vue.prototype.createRenderFn = function () {
+  //
 };

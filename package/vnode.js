@@ -34,7 +34,7 @@ class VNode {
 }
 /**
  * 递归把真实DOM转化成虚拟DOM
- * @param {DOMNode} realNode
+ * @param {HTML DOM} realNode
  *
  * @return {VNode}
  */
@@ -64,7 +64,7 @@ export function node2VNode(node) {
  * 递归把虚拟DOM转化成真实DOM
  * @param {VNode}
  *
- * @return {DOMNode} realNode
+ * @return {HTML DOM} realNode
  */
 export function vNode2Node(vNode) {
   if (vNode.type === 3) {

@@ -6,7 +6,7 @@ module.exports = {
   entry: resolve(__dirname, "src/main.js"),
   output: {
     path: resolve(__dirname, "dist"),
-    filename: "bundle.js",
+    filename: "index.js",
   },
   devServer: {
     host: "localhost",
