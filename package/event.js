@@ -16,6 +16,9 @@ const event = {
     }
     obj[type].forEach((cb) => cb());
   },
+  /**
+   * 取消事件
+   */
   off: (type, handler) => {
     if (!handler) {
       obj[type] = null;
@@ -24,6 +27,7 @@ const event = {
     obj[type] = obj[type].filter((cb) => cb !== handler);
   },
 };
+
 // const fn1 = () => {
 //   console.log("我是新的点击事件");
 // };

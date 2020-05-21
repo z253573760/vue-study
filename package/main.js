@@ -2,7 +2,6 @@ import { compier } from "./compier";
 import { node2VNode, vNode2Node } from "./vnode";
 import { observe } from "./observe";
 import { proxy } from "./proxy";
-import event from "./event";
 export default function Vue(opts) {
   this.$options = opts;
   this.$el = document.querySelector(opts.el);
