@@ -14,7 +14,7 @@ const vm = new Vue({
     },
   },
 });
-console.log(vm.a);
+console.log(vm);
 vm.a.b.c.d = "第1次改变";
 // vm.a.b.c = { d: "第2次改变" };
 // // console.log(vm._data);

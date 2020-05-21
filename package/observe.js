@@ -32,11 +32,21 @@ function defineRective(target, key, value, enumerable) {
   Object.defineProperty(target, key, {
     enumerable: Boolean(enumerable), //是否可以枚举
     get() {
+      console.log(`给${key}进行添加响应式`);
       return value;
     },
     set(newVal) {
       if (value === newVal) return;
-      console.log("我被更新了");
+      console.log("出发了setter ：我被更新了");
+      // 判断新赋的值 是否是一个复合类型
+      if (Array.isArray(newVal)) {
+        //判断是否是一个数组 数组用AOP劫持 添加响应式
+        defineRectiveOfArray(newVal);
+      }
+      if (isObject(newVal)) {
+        //判断是否是一个对象; 递归添加响应式
+        observe(newVal);
+      }
       value = newVal;
     },
   });
