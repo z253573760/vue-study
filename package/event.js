@@ -24,10 +24,17 @@ const event = {
     obj[type] = obj[type].filter((cb) => cb !== handler);
   },
 };
+// const fn1 = () => {
+//   console.log("我是新的点击事件");
+// };
+// event.on("$click", fn1);
 
 // event.on("$click", () => {
-//   console.log("我是新的点击事件");
+//   console.log("我是新的点击事件2");
 // });
 
+// event.emit("$click");
+
+// event.off("$click", fn1);
 // event.emit("$click");
 export default event;
