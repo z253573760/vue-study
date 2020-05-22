@@ -9,8 +9,7 @@ const reg = /\{\{(.+?)\}\}/g;
 function createGetValueByPath(path) {
   const list = path.split("."); // 切成数组 [ a, b, c, d ]
   return (obj) => {
-    console.log("obj", obj);
-    return list.reduce((pre, next) => pre[next.trim()], obj);
+    return list.reduce((pre, next) => pre[next.trim()], obj._data);
   };
 }
 /**
@@ -29,10 +28,4 @@ export function compier(vNode, vm) {
   for (const item of vNode.children) {
     compier(item, vm);
   }
-}
-
-export function compilerToFunction(template) {
-  return function render() {
-    //
-  };
 }

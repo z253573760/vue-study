@@ -18,8 +18,10 @@ window.vm = vm;
 let num = 0;
 setInterval(() => {
   num++;
-  vm.age = num;
-}, 5000);
+  vm._data.age = num;
+  num++;
+  vm._data.age = num;
+}, 2000);
 // vm.a.b.c = { d: "第2次改变" };
 // // console.log(vm._data);
 // // console.log("push", vm._data.list.push(4));

@@ -25,12 +25,10 @@ export function initState(vm) {
 function initProps() {}
 
 function initData(vm) {
-  console.log("initData");
   let data = vm.$options.data;
   //判断是否是函数
   data = vm._data = typeof data === "function" ? data.call(vm) : data;
-  console.log("vm", vm);
-  proxy(vm, "_data");
+  //proxy(vm, "_data");
   observe(data);
 }
 

@@ -2,7 +2,6 @@ import { compier } from "./compier";
 import { node2VNode, vNode2Node } from "./vnode";
 import { initState } from "./state";
 import Watcher from "./watcher";
-import Dep from "./dep";
 export default function Vue(opts) {
   this._init(opts);
 
@@ -32,13 +31,6 @@ Vue.prototype.$mount = function (el) {
     this.render();
   };
   new Watcher(vm, updateComponent);
-  // if (!options.render) {
-  //   let template = options.template;
-  //   if (!template && el) {
-  //     template = el.outerHTML;
-  //   }
-  //   //  options.render = compilerToFunction(template);
-  // }
 };
 
 /**
@@ -47,8 +39,7 @@ Vue.prototype.$mount = function (el) {
 Vue.prototype.compier = function () {
   const cloneNode = this.$el.cloneNode(true); // 先复制一份DOM再说
   const vNode = node2VNode(cloneNode);
-  compier(vNode, this._data); // 编译模板 => 把虚拟DOM中的插值表达式替换成data中的数据
-  this.$vNode = vNode;
+  compier(vNode, this); // 编译模板 => 把虚拟DOM中的插值表达式替换成data中的数据
   this.update(vNode);
 };
 

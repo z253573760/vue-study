@@ -4,7 +4,7 @@ class Dep {
     this.id = id++;
     this.subs = [];
   }
-  addSubs(sub) {
+  addSub(sub) {
     this.subs.push(sub);
   }
   notify() {
@@ -20,6 +20,7 @@ class Dep {
 Dep.target = null;
 const stack = []; // 存watcher
 export function pushTarget(watcher) {
+  Dep.target = watcher;
   stack.push(watcher);
 }
 export function popTarget() {

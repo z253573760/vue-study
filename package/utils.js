@@ -26,6 +26,7 @@ export function proxy(target, prop) {
         return value;
       },
       set(newVal) {
+        console.log("obj", obj, key);
         value = newVal;
       },
     });
