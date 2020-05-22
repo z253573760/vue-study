@@ -3,7 +3,7 @@ const vm = new Vue({
   el: "#app",
   data: {
     name: "灿灿",
-    age: 18,
+    age: 0,
     list: [1, 2, 3],
     a: {
       b: {
@@ -14,8 +14,12 @@ const vm = new Vue({
     },
   },
 });
-console.log(vm);
-vm.a.b.c.d = "第1次改变";
+window.vm = vm;
+let num = 0;
+setInterval(() => {
+  num++;
+  vm.age = num;
+}, 5000);
 // vm.a.b.c = { d: "第2次改变" };
 // // console.log(vm._data);
 // // console.log("push", vm._data.list.push(4));
