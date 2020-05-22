@@ -7,7 +7,8 @@ import { isObject, def } from "./utils";
  * @param {Object} data
  */
 export function observe(data) {
-  // if (!isObject(data)) return;
+  if (!isObject(data)) return;
+  if (data.__ob__) return data.__ob__;
   return new Observer(data);
 }
 
@@ -19,11 +20,16 @@ export function observe(data) {
  */
 function defineRective(target, key, value, enumerable) {
   const dep = new Dep();
+  const childObj = observe(value); //
   Object.defineProperty(target, key, {
     enumerable: Boolean(enumerable), //是否可以枚举
     get() {
       // 去收集依赖了
       dep.depend();
+      if (childObj) {
+        //数组收集当前渲染的watcher依赖
+        childObj.dep.depend();
+      }
       return value;
     },
     set(newVal) {
@@ -34,10 +40,11 @@ function defineRective(target, key, value, enumerable) {
         //判断是否是一个数组 数组用AOP劫持 添加响应式
         observeArray(newVal);
       }
-      if (isObject(newVal)) {
-        //判断是否是一个对象; 递归添加响应式
-        observe(newVal);
-      }
+      // if (isObject(newVal)) {
+      //   //判断是否是一个对象; 递归添加响应式
+      //   observe(newVal);
+      // }
+      observe(newVal);
       value = newVal;
       dep.notify();
     },
@@ -91,7 +98,9 @@ function observeArray(array) {
 export default class Observer {
   constructor(value) {
     this.value = value;
+    //数组专用的dep
     this.dep = new Dep();
+
     // 每个被添加响应式的数据 都添加一个__ob__的属性
     // 1.这个__ob__属性是不可被枚举的
     // 2.这个__ob__属性是不可以被重新设置
