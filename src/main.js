@@ -16,11 +16,12 @@ const vm = new Vue({
 });
 window.vm = vm;
 let num = 0;
+vm.list.push({ a: 1111 });
 setInterval(() => {
-  num++;
-  vm._data.age = num;
-  num++;
-  vm._data.age = num;
+  // num++;
+  // vm._data.age = num;
+  // num++;
+  // vm._data.age = num;
 }, 2000);
 // vm.a.b.c = { d: "第2次改变" };
 // // console.log(vm._data);

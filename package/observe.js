@@ -59,8 +59,9 @@ const arrayProto = Object.create(Array.prototype);
 ARRAY_METHODS.forEach((method) => {
   arrayProto[method] = function (...args) {
     let inserted = null; //当前用户插入的新数据
-    console.log(`${method}方法被执行了`);
+    console.log(`数组的${method}方法被执行了`);
     const res = Array.prototype[method].call(this, ...args);
+    console.log("this", this);
     if (method === "push") {
       inserted = args;
     } else if (method === "splice") {
@@ -72,6 +73,7 @@ ARRAY_METHODS.forEach((method) => {
       //如果插入了新的数据 这边给新数据添加响应式
       observeArray(inserted);
     }
+    this.__ob__.dep.notify();
     return res;
   };
 });
