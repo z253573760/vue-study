@@ -22,6 +22,8 @@ class Watcher {
   }
 
   update() {
+    // 这边用一个异步队列 先把watcher放到一个队列里 然后
+    //
     queueWatcher(this);
   }
 
@@ -67,11 +69,20 @@ export function queueWatcher(watcher) {
 const callBacks = [];
 /**
  * 放到异步队列中 然后再全部执行
+ * 简单来说 就是利用 事件循环的机制 (微任务 宏任务)
+ * this.name = "灿灿"
+ * this.name = "灿灿2"
+ * 触发了 setter  然后的一系列动作都属于是主线程
+ * 主线程将 回调函数都放到一个队列中后
+ * 主线程结束 进行异步队列的 执行
+ * 再把所有的更新函数 执行
+ *
  * @param {function} fn
  */
 function nextTick(fn) {
   callBacks.push(fn);
   // Promise.resolve.then(flusCallBacks); // 兼容问题 用setTimeout替代
+  //
   setTimeout(flusCallBacks, 0);
 }
 /**
