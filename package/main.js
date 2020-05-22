@@ -49,6 +49,7 @@ Vue.prototype.compier = function () {
 Vue.prototype.render = function () {
   this.compier();
 };
+
 /**将虚拟DOM 元素更新到 DOM 中
  * @param {vNode} vNode
  */
