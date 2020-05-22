@@ -28,7 +28,7 @@ function initData(vm) {
   let data = vm.$options.data;
   //判断是否是函数
   data = vm._data = typeof data === "function" ? data.call(vm) : data;
-  //proxy(vm, "_data");
+  proxy(vm, "_data");
   observe(data);
 }
 

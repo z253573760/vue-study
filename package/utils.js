@@ -23,10 +23,12 @@ export function proxy(target, prop) {
     let value = obj[key];
     Object.defineProperty(target, key, {
       get() {
+        console.log("触发了代理proxy >>> get");
         return value;
       },
       set(newVal) {
-        console.log("obj", obj, key);
+        console.log("触发了代理proxy >>> set", target, prop, key);
+        target[prop][key] = newVal;
         value = newVal;
       },
     });
