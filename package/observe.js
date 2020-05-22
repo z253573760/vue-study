@@ -22,6 +22,7 @@ function defineRective(target, key, value, enumerable) {
   Object.defineProperty(target, key, {
     enumerable: Boolean(enumerable), //是否可以枚举
     get() {
+      // 去收集依赖了
       dep.depend();
       return value;
     },
