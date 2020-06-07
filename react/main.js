@@ -7,9 +7,9 @@ class Updater {
 
 class UpdateQueue {
   constructor() {
-    this.baseState = null;
-    this.firstUpdate = null;
-    this.lastUpdate = null;
+    this.baseState = null; //原状态
+    this.firstUpdate = null; // 第一个更新
+    this.lastUpdate = null; // 最后一个更新
   }
   enqueueUpdate(update) {
     //
