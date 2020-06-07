@@ -1,4 +1,4 @@
-import Vue from "../vue/main";
+import Vue from "../package/main";
 const vm = new Vue({
   el: "#app",
   data: {
