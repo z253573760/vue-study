@@ -26,7 +26,7 @@ function initProps() {}
 
 function initData(vm) {
   let data = vm.$options.data;
-  //判断是否是函数
+  //判断是否是函数 然后赋值给vm
   data = vm._data = typeof data === "function" ? data.call(vm) : data;
   // 这边做一个简单的代理 方便 this.name = "灿灿" 可以直接设置和访问 实例中的_data的属性
   proxy(vm, "_data");

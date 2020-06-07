@@ -3,8 +3,9 @@ import Dep from "./dep";
 import { isObject, def } from "./utils";
 
 /**
- * 循环对象的KEY 添加响应式
- * @param {Object} data
+ * 添加响应式 判断data是否为一个对象
+ * 如果是对象 则new Observer 对data 进行响应式的处理
+ * @param {any} data
  */
 export function observe(data) {
   if (!isObject(data)) return;

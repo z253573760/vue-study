@@ -23,7 +23,7 @@ Vue.prototype._init = function (options) {
 Vue.prototype.$mount = function (el) {
   // 优先级 render => template => el
   const vm = this;
-  const options = vm.$options;
+  // const options = vm.$options;
   el = vm.$el = document.querySelector(el);
   vm.$parent = vm.$el.parentNode;
   const updateComponent = () => {
