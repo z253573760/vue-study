@@ -32,6 +32,7 @@ class VNode {
     this.children.push(vnode);
   }
 }
+
 /**
  * 递归把真实DOM转化成虚拟DOM
  * @param {HTML DOM} realNode
