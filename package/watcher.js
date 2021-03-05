@@ -86,7 +86,7 @@ function nextTick(fn) {
   setTimeout(flusCallBacks, 0);
 }
 /**
- * 异步队列中的函数全部执行
+ * 异步队列中的函数 全部执行
  */
 function flusCallBacks() {
   callBacks.forEach((fn) => fn());
