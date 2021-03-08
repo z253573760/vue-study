@@ -29,6 +29,7 @@ function defineRective(target, key, value, enumerable) {
       dep.depend();
       if (childObj) {
         //数组收集当前渲染的watcher依赖
+        childObj.dep.depend();
       }
       return value;
     },
